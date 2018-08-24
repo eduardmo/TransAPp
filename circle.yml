@@ -1,0 +1,27 @@
+machine:
+  xcode:
+    version: 8.2.1
+
+dependencies:
+  pre:
+    - sudo gem install bundler
+    - nvm install 7.10.1
+    - nvm use 7.10.1
+    - rm -rf node_modules
+    - npm cache clean
+
+  override:
+    - npm install -g yarn
+    - yarn --ignore-engines
+    - bundle install
+
+test:
+  override:
+    - yarn run test
+
+# For now we will comment our CD since its failing because our instance is not Mac OS
+#deployment:
+#    develop:
+#        branch: master
+#        commands:
+#          - yarn ios:beta-ci
